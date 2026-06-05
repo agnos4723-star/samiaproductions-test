@@ -20,7 +20,7 @@ if (window.innerWidth > 768) {
     follower.style.top = e.clientY - 18 + 'px';
   });
 
-  document.querySelectorAll('a, button, .gallery-item, .equip-item, input, textarea, select').forEach(el => {
+  document.querySelectorAll('a, button, .gallery-item, .equip-item').forEach(el => {
     el.addEventListener('mouseenter', () => {
       cursor.classList.add('active');
       follower.classList.add('active');
@@ -46,7 +46,7 @@ backToTop.addEventListener('click', () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
-/* ===== BURGER ===== */
+/* ===== BURGER MENU ===== */
 const burger = document.getElementById('burger');
 const mobileMenu = document.getElementById('mobileMenu');
 
@@ -64,7 +64,7 @@ document.querySelectorAll('.mobile-link').forEach(link => {
   });
 });
 
-/* ===== REVEAL ===== */
+/* ===== REVEAL ON SCROLL ===== */
 const revealObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
@@ -77,7 +77,7 @@ const revealObserver = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-/* ===== COUNTERS ===== */
+/* ===== COUNTER ANIMATION ===== */
 const counterObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
@@ -88,7 +88,10 @@ const counterObserver = new IntersectionObserver((entries) => {
       const timer = setInterval(() => {
         current += increment;
         if (current >= target) {
-          el.textContent = target + '+';
+          if (target === 350) el.textContent = target + '+';
+          else if (target === 100) el.textContent = target + '%';
+          else if (target === 5) el.textContent = target + '/5';
+          else el.textContent = target;
           clearInterval(timer);
         } else {
           el.textContent = Math.floor(current);
@@ -101,13 +104,17 @@ const counterObserver = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.stat-number').forEach(el => counterObserver.observe(el));
 
-/* ===== LIGHTBOX ===== */
+/* ===== LIGHTBOX — 15 PHOTOS ===== */
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.getElementById('lightboxImg');
 const lightboxCounter = document.getElementById('lightboxCounter');
 const galleryItems = document.querySelectorAll('.gallery-item');
 let currentIndex = 0;
-const images = Array.from(galleryItems).map(item => item.querySelector('img').src);
+
+const images = Array.from(galleryItems).map(item => ({
+  src: item.querySelector('img').src,
+  alt: item.querySelector('img').alt
+}));
 
 function openLightbox(index) {
   currentIndex = index;
@@ -115,22 +122,40 @@ function openLightbox(index) {
   lightbox.classList.add('active');
   document.body.style.overflow = 'hidden';
 }
+
 function closeLightbox() {
   lightbox.classList.remove('active');
   document.body.style.overflow = '';
 }
+
 function updateLightbox() {
-  lightboxImg.src = images[currentIndex];
+  lightboxImg.src = images[currentIndex].src;
+  lightboxImg.alt = images[currentIndex].alt;
   lightboxCounter.textContent = `${currentIndex + 1} / ${images.length}`;
 }
-function nextImage() { currentIndex = (currentIndex + 1) % images.length; updateLightbox(); }
-function prevImage() { currentIndex = (currentIndex - 1 + images.length) % images.length; updateLightbox(); }
 
-galleryItems.forEach((item, i) => item.addEventListener('click', () => openLightbox(i)));
+function nextImage() {
+  currentIndex = (currentIndex + 1) % images.length;
+  updateLightbox();
+}
+
+function prevImage() {
+  currentIndex = (currentIndex - 1 + images.length) % images.length;
+  updateLightbox();
+}
+
+galleryItems.forEach((item, i) => {
+  item.addEventListener('click', () => openLightbox(i));
+});
+
 document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
 document.getElementById('lightboxNext').addEventListener('click', nextImage);
 document.getElementById('lightboxPrev').addEventListener('click', prevImage);
-lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+
+lightbox.addEventListener('click', (e) => {
+  if (e.target === lightbox) closeLightbox();
+});
+
 document.addEventListener('keydown', (e) => {
   if (!lightbox.classList.contains('active')) return;
   if (e.key === 'Escape') closeLightbox();
@@ -138,7 +163,7 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'ArrowLeft') prevImage();
 });
 
-/* ===== TESTIMONIALS ===== */
+/* ===== TESTIMONIALS SLIDER — 5 AVIS ===== */
 const track = document.getElementById('testimonialTrack');
 const dotsContainer = document.getElementById('sliderDots');
 const totalSlides = document.querySelectorAll('.testimonial-card').length;
@@ -155,47 +180,45 @@ for (let i = 0; i < totalSlides; i++) {
 function goToSlide(index) {
   currentSlide = index;
   track.style.transform = `translateX(-${currentSlide * 100}%)`;
-  document.querySelectorAll('.slider-dot').forEach((d, i) => d.classList.toggle('active', i === currentSlide));
-}
-
-document.getElementById('nextTestimonial').addEventListener('click', () => goToSlide((currentSlide + 1) % totalSlides));
-document.getElementById('prevTestimonial').addEventListener('click', () => goToSlide((currentSlide - 1 + totalSlides) % totalSlides));
-
-let autoPlay = setInterval(() => goToSlide((currentSlide + 1) % totalSlides), 5000);
-const sliderEl = document.querySelector('.testimonials-slider');
-sliderEl.addEventListener('mouseenter', () => clearInterval(autoPlay));
-sliderEl.addEventListener('mouseleave', () => { autoPlay = setInterval(() => goToSlide((currentSlide + 1) % totalSlides), 5000); });
-
-/* ===== CONTACT FORM ===== */
-const form = document.getElementById('contactForm');
-const toast = document.getElementById('toast');
-
-if (form) {
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const btn = form.querySelector('button[type="submit"]');
-    const original = btn.innerHTML;
-    btn.innerHTML = '<span>Envoi en cours...</span>';
-    btn.disabled = true;
-    setTimeout(() => {
-      toast.classList.add('active');
-      form.reset();
-      btn.innerHTML = original;
-      btn.disabled = false;
-      setTimeout(() => toast.classList.remove('active'), 4000);
-    }, 1500);
+  document.querySelectorAll('.slider-dot').forEach((d, i) => {
+    d.classList.toggle('active', i === currentSlide);
   });
 }
 
-/* ===== PARTICLES ===== */
+document.getElementById('nextTestimonial').addEventListener('click', () => {
+  goToSlide((currentSlide + 1) % totalSlides);
+});
+
+document.getElementById('prevTestimonial').addEventListener('click', () => {
+  goToSlide((currentSlide - 1 + totalSlides) % totalSlides);
+});
+
+let autoPlay = setInterval(() => {
+  goToSlide((currentSlide + 1) % totalSlides);
+}, 5000);
+
+const sliderEl = document.querySelector('.testimonials-slider');
+sliderEl.addEventListener('mouseenter', () => clearInterval(autoPlay));
+sliderEl.addEventListener('mouseleave', () => {
+  autoPlay = setInterval(() => {
+    goToSlide((currentSlide + 1) % totalSlides);
+  }, 5000);
+});
+
+/* ===== PARTICLES + CONNECTIONS ===== */
 const canvas = document.getElementById('particles');
 const ctx = canvas.getContext('2d');
 let particles = [];
 
-function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
 
 class Particle {
-  constructor() { this.reset(); }
+  constructor() {
+    this.reset();
+  }
   reset() {
     this.x = Math.random() * canvas.width;
     this.y = Math.random() * canvas.height;
@@ -207,7 +230,9 @@ class Particle {
   update() {
     this.x += this.speedX;
     this.y += this.speedY;
-    if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) this.reset();
+    if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
+      this.reset();
+    }
   }
   draw() {
     ctx.beginPath();
@@ -221,14 +246,17 @@ function initParticles() {
   resizeCanvas();
   const count = window.innerWidth < 768 ? 30 : 60;
   particles = [];
-  for (let i = 0; i < count; i++) particles.push(new Particle());
+  for (let i = 0; i < count; i++) {
+    particles.push(new Particle());
+  }
 }
 
 function animateParticles() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  particles.forEach(p => { p.update(); p.draw(); });
-
-  // Draw connections
+  particles.forEach(p => {
+    p.update();
+    p.draw();
+  });
   for (let i = 0; i < particles.length; i++) {
     for (let j = i + 1; j < particles.length; j++) {
       const dx = particles[i].x - particles[j].x;
@@ -244,7 +272,6 @@ function animateParticles() {
       }
     }
   }
-
   requestAnimationFrame(animateParticles);
 }
 
@@ -260,14 +287,16 @@ const sectionObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       const id = entry.target.getAttribute('id');
-      navLinks.forEach(link => link.classList.toggle('active', link.getAttribute('href') === `#${id}`));
+      navLinks.forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
+      });
     }
   });
 }, { threshold: 0.3, rootMargin: '-80px 0px -50% 0px' });
 
 sections.forEach(s => sectionObserver.observe(s));
 
-/* ===== PARALLAX on MOUSE (Equipment section) ===== */
+/* ===== EQUIPMENT 3D MOUSE PARALLAX ===== */
 document.querySelectorAll('.equip-animation').forEach(anim => {
   anim.addEventListener('mousemove', (e) => {
     const rect = anim.getBoundingClientRect();
@@ -284,7 +313,7 @@ document.querySelectorAll('.equip-animation').forEach(anim => {
   });
 });
 
-/* ===== TIMECODE animation ===== */
+/* ===== CINEMA TIMECODE ===== */
 const timecodeEl = document.querySelector('.cinema-timecode');
 if (timecodeEl) {
   let frame = 0;
@@ -294,6 +323,7 @@ if (timecodeEl) {
     const s = Math.floor(frame / 25) % 60;
     const m = Math.floor(frame / 1500) % 60;
     const h = Math.floor(frame / 90000) % 24;
-    timecodeEl.textContent = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}:${String(f).padStart(2,'0')}`;
+    timecodeEl.textContent =
+      `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}:${String(f).padStart(2,'0')}`;
   }, 40);
 }
