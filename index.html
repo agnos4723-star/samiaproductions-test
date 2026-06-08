@@ -32,7 +32,7 @@
         <div class="camera-click-effect"></div>
       </div>
       <p class="loader-text">Samia Productions</p>
-      <p class="loader-subtext">Préparation de votre expérience...</p>
+      <p class="loader-subtext">Chargement de votre univers...</p>
     </div>
   </div>
 
@@ -40,13 +40,19 @@
   <div class="cursor" id="cursor"></div>
   <div class="cursor-follower" id="cursorFollower"></div>
 
+  <!-- STARS CANVAS -->
+  <canvas id="starsCanvas"></canvas>
+
   <!-- PARTICLES -->
   <canvas id="particles"></canvas>
 
   <!-- HEADER -->
   <header class="topbar" id="topbar">
     <a class="brand" href="#home">
-      <img src="logo.png" alt="Samia Productions Logo" class="brand-logo">
+      <div class="logo-float-wrapper">
+        <img src="logo.png" alt="Samia Productions Logo" class="brand-logo">
+        <div class="logo-glow"></div>
+      </div>
       <span class="brand-text">Samia Productions</span>
     </a>
     <nav class="nav-links" id="navLinks">
@@ -84,34 +90,27 @@
       <div class="hero-bg">
         <div class="hero-bg-img"></div>
         <div class="hero-overlay"></div>
+        <div class="nebula-1"></div>
+        <div class="nebula-2"></div>
+        <div class="nebula-3"></div>
       </div>
 
-      <div class="flying-drone" id="flyingDrone">
-        <div class="drone-body">
-          <div class="drone-camera-eye"></div>
-          <div class="drone-arm arm-fl">
-            <div class="propeller"><div class="blade"></div><div class="blade b2"></div></div>
-          </div>
-          <div class="drone-arm arm-fr">
-            <div class="propeller"><div class="blade"></div><div class="blade b2"></div></div>
-          </div>
-          <div class="drone-arm arm-bl">
-            <div class="propeller"><div class="blade"></div><div class="blade b2"></div></div>
-          </div>
-          <div class="drone-arm arm-br">
-            <div class="propeller"><div class="blade"></div><div class="blade b2"></div></div>
-          </div>
-        </div>
-        <div class="drone-shadow"></div>
-      </div>
+      <!-- PLANETES DECORATIVES -->
+      <div class="planet planet-1"></div>
+      <div class="planet planet-2"></div>
+      <div class="planet planet-3"></div>
 
-      <div class="floating-film">
-        <div class="film-strip">
-          <div class="film-frame"></div><div class="film-frame"></div>
-          <div class="film-frame"></div><div class="film-frame"></div>
-          <div class="film-frame"></div><div class="film-frame"></div>
-          <div class="film-frame"></div><div class="film-frame"></div>
-        </div>
+      <!-- ETOILES FILANTES -->
+      <div class="shooting-star ss-1"></div>
+      <div class="shooting-star ss-2"></div>
+      <div class="shooting-star ss-3"></div>
+
+      <!-- LOGO FLOTTANT HERO -->
+      <div class="hero-logo-float">
+        <div class="hero-logo-ring"></div>
+        <div class="hero-logo-ring r2"></div>
+        <img src="logo.png" alt="Samia Productions" class="hero-logo-img">
+        <div class="hero-logo-glow"></div>
       </div>
 
       <div class="hero-content reveal">
@@ -199,7 +198,6 @@
         <h2>Du matériel professionnel<br />au service de votre histoire</h2>
       </div>
       <div class="equipment-showcase">
-
         <div class="equip-item reveal" data-delay="0">
           <div class="equip-animation">
             <div class="cam-3d">
@@ -289,7 +287,7 @@
           </div>
           <div class="equip-emoji">🚁</div>
           <h3>Prises de Vue Aériennes par Drone</h3>
-          <p>Images et vidéos aériennes spectaculaires pour sublimer votre lieu de réception et raconter votre histoire sous un autre angle.</p>
+          <p>Images et vidéos aériennes spectaculaires pour sublimer votre lieu de réception.</p>
         </div>
 
         <div class="equip-item reveal" data-delay="600">
@@ -306,9 +304,8 @@
           </div>
           <div class="equip-emoji">📱</div>
           <h3>Content Creator & Réseaux Sociaux</h3>
-          <p>Création de vidéos verticales prêtes à publier sur Instagram, TikTok et Facebook, capturées et montées spécialement pour les réseaux sociaux.</p>
+          <p>Création de vidéos verticales prêtes à publier sur Instagram, TikTok et Facebook.</p>
         </div>
-
       </div>
     </section>
 
@@ -334,7 +331,7 @@
         <article class="card service-card reveal" data-delay="300">
           <div class="service-number">03</div>
           <h3>Content Creator</h3>
-          <p>Vidéos verticales pour Instagram, TikTok et Facebook — livrées rapidement après votre journée.</p>
+          <p>Vidéos verticales pour Instagram, TikTok et Facebook — livrées rapidement.</p>
           <div class="card-footer"><a href="#contact" class="card-link">En savoir plus →</a></div>
         </article>
       </div>
@@ -516,7 +513,6 @@
       <div class="testimonials-slider">
         <div class="testimonial-track" id="testimonialTrack">
 
-          <!-- 2024 -->
           <article class="testimonial-card">
             <div class="stars">★★★★★</div>
             <blockquote>"Samia a su capturer chaque moment avec une sensibilité incroyable. Nos photos de mariage sont tout simplement magnifiques. Un talent rare et une personne adorable !"</blockquote>
@@ -544,7 +540,6 @@
             </div>
           </article>
 
-          <!-- 2025 -->
           <article class="testimonial-card">
             <div class="stars">★★★★★</div>
             <blockquote>"Le teaser pour Instagram était incroyable, tous nos invités l'ont adoré ! Samia a un vrai sens artistique et une énergie magnifique."</blockquote>
@@ -572,7 +567,6 @@
             </div>
           </article>
 
-          <!-- 2026 -->
           <article class="testimonial-card">
             <div class="stars">★★★★★</div>
             <blockquote>"Une vraie artiste ! La vidéo cinématographique nous a fait pleurer de joie. Chaque détail est soigné avec une précision remarquable."</blockquote>
@@ -706,6 +700,7 @@
   <footer class="footer">
     <div class="footer-content">
       <div class="footer-brand">
+        <img src="logo.png" alt="Logo" class="footer-logo">
         <h3>Samia Productions</h3>
         <p>L'art de capturer vos plus beaux moments.</p>
         <div class="footer-contact">
