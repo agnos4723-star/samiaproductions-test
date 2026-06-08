@@ -1,4 +1,4 @@
-// ====================== SAMIA PRODUCTIONS — SCRIPT.JS SPATIAL ======================
+// ====================== SAMIA PRODUCTIONS — SCRIPT.JS SPATIAL DORÉ ======================
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -7,9 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ==================== LOADER ====================
   window.addEventListener('load', () => {
-    setTimeout(() => {
-      $('loader').classList.add('hidden');
-    }, 2200);
+    setTimeout(() => { $('loader').classList.add('hidden'); }, 2200);
   });
 
   // ==================== YEAR ====================
@@ -30,11 +28,18 @@ document.addEventListener('DOMContentLoaded', () => {
     reset() {
       this.x = Math.random() * starsCanvas.width;
       this.y = Math.random() * starsCanvas.height;
-      this.size = Math.random() * 2 + 0.5;
+      this.size = Math.random() * 2 + 0.3;
       this.opacity = Math.random() * 0.8 + 0.2;
       this.twinkleSpeed = Math.random() * 0.02 + 0.005;
       this.twinkleDir = Math.random() > 0.5 ? 1 : -1;
-      this.color = Math.random() > 0.8 ? '#4da6ff' : Math.random() > 0.9 ? '#c9a96e' : '#ffffff';
+      const r = Math.random();
+      if (r > 0.85) {
+        this.r = 201; this.g = 169; this.b = 110;
+      } else if (r > 0.7) {
+        this.r = 232; this.g = 213; this.b = 168;
+      } else {
+        this.r = 255; this.g = 255; this.b = 255;
+      }
     }
     update() {
       this.opacity += this.twinkleSpeed * this.twinkleDir;
@@ -44,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
     draw() {
       starsCtx.beginPath();
       starsCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-      starsCtx.fillStyle = this.color.replace(')', ',' + this.opacity + ')').replace('rgb', 'rgba').replace('#ffffff', 'rgba(255,255,255,' + this.opacity + ')').replace('#4da6ff', 'rgba(77,166,255,' + this.opacity + ')').replace('#c9a96e', 'rgba(201,169,110,' + this.opacity + ')');
+      starsCtx.fillStyle = 'rgba(' + this.r + ',' + this.g + ',' + this.b + ',' + this.opacity + ')';
       starsCtx.fill();
     }
   }
@@ -64,7 +69,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   initStars();
   animateStars();
-
   window.addEventListener('resize', initStars);
 
   // ==================== CUSTOM CURSOR ====================
@@ -141,9 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         const delay = entry.target.dataset.delay || 0;
-        setTimeout(() => {
-          entry.target.classList.add('visible');
-        }, parseInt(delay));
+        setTimeout(() => { entry.target.classList.add('visible'); }, parseInt(delay));
         revealObserver.unobserve(entry.target);
       }
     });
@@ -288,7 +290,6 @@ document.addEventListener('DOMContentLoaded', () => {
       this.speedX = (Math.random() - 0.5) * 0.3;
       this.speedY = (Math.random() - 0.5) * 0.3;
       this.opacity = Math.random() * 0.4 + 0.1;
-      this.color = Math.random() > 0.5 ? '77,166,255' : '201,169,110';
     }
     update() {
       this.x += this.speedX;
@@ -298,7 +299,7 @@ document.addEventListener('DOMContentLoaded', () => {
     draw() {
       ctx.beginPath();
       ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(' + this.color + ',' + this.opacity + ')';
+      ctx.fillStyle = 'rgba(201,169,110,' + this.opacity + ')';
       ctx.fill();
     }
   }
@@ -323,7 +324,7 @@ document.addEventListener('DOMContentLoaded', () => {
           ctx.beginPath();
           ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
           ctx.lineTo(particlesArray[j].x, particlesArray[j].y);
-          ctx.strokeStyle = 'rgba(77,166,255,' + (0.05 * (1 - dist / 120)) + ')';
+          ctx.strokeStyle = 'rgba(201,169,110,' + (0.05 * (1 - dist / 120)) + ')';
           ctx.lineWidth = 0.5;
           ctx.stroke();
         }
@@ -396,6 +397,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ==================== CONSOLE LOG ====================
-  console.log('%cSamia Productions 🚀 — Bienvenue dans l\'univers spatial ✨', 'color:#4da6ff; font-size:14px; font-family:Cormorant Garamond,serif;');
+  console.log('%cSamia Productions ✨ — Bienvenue dans l\'univers spatial doré 🌌', 'color:#c9a96e; font-size:14px; font-family:Cormorant Garamond,serif;');
 
 });
