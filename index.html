@@ -5,9 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Samia Productions — Photographe & vidéaste de mariage haut de gamme." />
   <title>Samia Productions — Photographe & Vidéaste de Mariage</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -40,7 +41,7 @@
   <div class="cursor" id="cursor"></div>
   <div class="cursor-follower" id="cursorFollower"></div>
 
-  <!-- STARS CANVAS -->
+  <!-- STARS -->
   <canvas id="starsCanvas"></canvas>
 
   <!-- PARTICLES -->
@@ -49,12 +50,13 @@
   <!-- HEADER -->
   <header class="topbar" id="topbar">
     <a class="brand" href="#home">
-      <div class="logo-float-wrapper">
+      <span class="brand-logo-wrap logo-float-wrapper">
         <img src="logo.png" alt="Samia Productions Logo" class="brand-logo">
-        <div class="logo-glow"></div>
-      </div>
+        <span class="brand-logo-glow logo-glow"></span>
+      </span>
       <span class="brand-text">Samia Productions</span>
     </a>
+
     <nav class="nav-links" id="navLinks">
       <a href="#presentation" class="nav-link">Présentation</a>
       <a href="#prestations" class="nav-link">Prestations</a>
@@ -64,9 +66,17 @@
       <a href="#temoignages" class="nav-link">Témoignages</a>
       <a href="#contact" class="nav-link">Contact</a>
     </nav>
-    <button class="burger" id="burger" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
+
+    <div class="topbar-actions">
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Changer de thème">
+        <span class="theme-toggle-icon" id="themeToggleIcon">☀</span>
+        <span class="theme-toggle-text" id="themeToggleText">Thème blanc</span>
+      </button>
+
+      <button class="burger" id="burger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </header>
 
   <!-- MOBILE MENU -->
@@ -80,6 +90,11 @@
       <a href="#galerie" class="mobile-link">Galerie</a>
       <a href="#temoignages" class="mobile-link">Témoignages</a>
       <a href="#contact" class="mobile-link">Contact</a>
+
+      <button class="theme-toggle mobile-theme-toggle" id="mobileThemeToggle" type="button">
+        <span class="theme-toggle-icon">☀</span>
+        <span>Changer de thème</span>
+      </button>
     </nav>
   </div>
 
@@ -88,29 +103,61 @@
     <!-- HERO -->
     <section class="hero" id="home">
       <div class="hero-bg">
-        <div class="hero-bg-img"></div>
+        <div class="hero-image hero-bg-img"></div>
         <div class="hero-overlay"></div>
-        <div class="nebula-1"></div>
-        <div class="nebula-2"></div>
-        <div class="nebula-3"></div>
+
+        <div class="nebula nebula-1"></div>
+        <div class="nebula nebula-2"></div>
+        <div class="nebula nebula-3"></div>
+
+        <div class="planet planet-1"></div>
+        <div class="planet planet-2"></div>
+        <div class="planet planet-3"></div>
+
+        <div class="shooting-star shooting-star-1"></div>
+        <div class="shooting-star shooting-star-2"></div>
       </div>
 
-      <!-- PLANETES DECORATIVES -->
-      <div class="planet planet-1"></div>
-      <div class="planet planet-2"></div>
-      <div class="planet planet-3"></div>
+      <!-- DRONE VOLANT -->
+      <div class="flying-drone" id="flyingDrone">
+        <div class="drone-body">
+          <div class="drone-camera-eye"></div>
+          <div class="drone-arm arm-fl">
+            <div class="propeller"><div class="blade"></div><div class="blade b2"></div></div>
+          </div>
+          <div class="drone-arm arm-fr">
+            <div class="propeller"><div class="blade"></div><div class="blade b2"></div></div>
+          </div>
+          <div class="drone-arm arm-bl">
+            <div class="propeller"><div class="blade"></div><div class="blade b2"></div></div>
+          </div>
+          <div class="drone-arm arm-br">
+            <div class="propeller"><div class="blade"></div><div class="blade b2"></div></div>
+          </div>
+        </div>
+        <div class="drone-shadow"></div>
+      </div>
 
-      <!-- ETOILES FILANTES -->
-      <div class="shooting-star ss-1"></div>
-      <div class="shooting-star ss-2"></div>
-      <div class="shooting-star ss-3"></div>
+      <!-- FILM FLOTTANT -->
+      <div class="floating-film">
+        <div class="film-strip">
+          <div class="film-frame"></div>
+          <div class="film-frame"></div>
+          <div class="film-frame"></div>
+          <div class="film-frame"></div>
+          <div class="film-frame"></div>
+          <div class="film-frame"></div>
+          <div class="film-frame"></div>
+          <div class="film-frame"></div>
+        </div>
+      </div>
 
-      <!-- LOGO FLOTTANT HERO -->
+      <!-- LOGO HERO -->
       <div class="hero-logo-float">
-        <div class="hero-logo-ring"></div>
-        <div class="hero-logo-ring r2"></div>
-        <img src="logo.png" alt="Samia Productions" class="hero-logo-img">
-        <div class="hero-logo-glow"></div>
+        <span class="hero-logo-ring"></span>
+        <span class="hero-logo-ring hero-logo-ring-2"></span>
+        <img src="logo.png" alt="Samia Productions" class="hero-logo hero-logo-img">
+        <span class="hero-logo-glow"></span>
       </div>
 
       <div class="hero-content reveal">
@@ -119,24 +166,33 @@
           <span>Photographe & Vidéaste de Mariage</span>
           <span class="diamond">◆</span>
         </div>
+
         <h1 class="hero-title">
           <span class="title-line"><span class="title-word">Samia</span></span>
           <span class="title-line"><span class="title-word">Productions</span></span>
         </h1>
-        <p class="lead">Des images raffinées, intemporelles et lumineuses pour célébrer votre journée avec élégance et sophistication.</p>
+
+        <p class="hero-lead lead">
+          Des images raffinées, intemporelles et lumineuses pour célébrer votre journée
+          avec élégance, émotion et sophistication.
+        </p>
+
         <div class="hero-actions">
           <a class="button primary" href="#contact">
             <span>Demander un devis</span>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>
           <a class="button secondary" href="#galerie">
             <span>Voir la galerie</span>
           </a>
         </div>
-        <div class="scroll-indicator">
-          <div class="scroll-line"></div>
-          <span>Scroll</span>
+      </div>
+
+      <!-- SCROLL REPOSITIONNÉ -->
+      <div class="scroll-indicator">
+        <div class="scroll-mouse">
+          <span class="scroll-dot"></span>
         </div>
+        <span class="scroll-text">Scroll</span>
       </div>
     </section>
 
@@ -164,26 +220,39 @@
     <section class="section" id="presentation">
       <div class="section-heading reveal">
         <p class="eyebrow"><span class="line-left"></span> Présentation <span class="line-right"></span></p>
-        <h2>Une vision sobre, émotionnelle<br />et haut de gamme</h2>
+        <h2>Une vision sobre, émotionnelle<br>et haut de gamme</h2>
       </div>
-      <div class="about-grid">
-        <article class="card about-card reveal" data-delay="0">
+
+      <div class="about-grid cards-grid three-up">
+        <article class="card about-card tilt-card reveal" data-delay="0">
           <div class="card-icon">
-            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
+              <line x1="9" y1="9" x2="9.01" y2="9"/>
+              <line x1="15" y1="9" x2="15.01" y2="9"/>
+            </svg>
           </div>
           <h3>Authenticité</h3>
           <p>Des souvenirs visuels authentiques avec un style empreint de douceur, de lumière et de sophistication.</p>
         </article>
-        <article class="card about-card reveal" data-delay="150">
+
+        <article class="card about-card tilt-card reveal" data-delay="150">
           <div class="card-icon">
-            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/>
+              <circle cx="12" cy="13" r="4"/>
+            </svg>
           </div>
           <h3>Excellence</h3>
           <p>Équipement de dernière génération et œil artistique pour des images HD intemporelles.</p>
         </article>
-        <article class="card about-card reveal" data-delay="300">
+
+        <article class="card about-card tilt-card reveal" data-delay="300">
           <div class="card-icon">
-            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
+            </svg>
           </div>
           <h3>Émotion</h3>
           <p>Portraits élégants, reportage discret et montage cinématographique pour revivre chaque instant.</p>
@@ -195,10 +264,12 @@
     <section class="section equipment-section" id="equipement">
       <div class="section-heading reveal">
         <p class="eyebrow"><span class="line-left"></span> Matériel Professionnel <span class="line-right"></span></p>
-        <h2>Du matériel professionnel<br />au service de votre histoire</h2>
+        <h2>Du matériel professionnel<br>au service de votre histoire</h2>
       </div>
-      <div class="equipment-showcase">
-        <div class="equip-item reveal" data-delay="0">
+
+      <div class="equipment-showcase equipment-grid">
+
+        <div class="equip-item equipment-card tilt-card reveal" data-delay="0">
           <div class="equip-animation">
             <div class="cam-3d">
               <div class="cam-body-3d">
@@ -231,12 +302,12 @@
               </div>
             </div>
           </div>
-          <div class="equip-emoji">📸</div>
+          <div class="equip-emoji equipment-icon">📸</div>
           <h3>Photographie Professionnelle</h3>
           <p>Reportage photo naturel et élégant, capturant chaque émotion et chaque détail de votre journée.</p>
         </div>
 
-        <div class="equip-item reveal" data-delay="200">
+        <div class="equip-item equipment-card tilt-card reveal" data-delay="200">
           <div class="equip-animation">
             <div class="cinema-cam">
               <div class="cinema-body">
@@ -261,12 +332,12 @@
               </div>
             </div>
           </div>
-          <div class="equip-emoji">🎥</div>
+          <div class="equip-emoji equipment-icon">🎥</div>
           <h3>Vidéo Cinématographique 4K</h3>
           <p>Films de mariage en haute définition 4K, réalisés avec un style cinématographique moderne et immersif.</p>
         </div>
 
-        <div class="equip-item reveal" data-delay="400">
+        <div class="equip-item equipment-card tilt-card reveal" data-delay="400">
           <div class="equip-animation">
             <div class="drone-showcase">
               <div class="drone-sc-body">
@@ -285,12 +356,12 @@
               </div>
             </div>
           </div>
-          <div class="equip-emoji">🚁</div>
+          <div class="equip-emoji equipment-icon">🚁</div>
           <h3>Prises de Vue Aériennes par Drone</h3>
-          <p>Images et vidéos aériennes spectaculaires pour sublimer votre lieu de réception.</p>
+          <p>Images et vidéos aériennes spectaculaires pour sublimer votre lieu de réception et raconter votre histoire sous un autre angle.</p>
         </div>
 
-        <div class="equip-item reveal" data-delay="600">
+        <div class="equip-item equipment-card tilt-card reveal" data-delay="600">
           <div class="equip-animation">
             <div class="gimbal-anim">
               <div class="gimbal-handle"></div>
@@ -302,10 +373,11 @@
               </div>
             </div>
           </div>
-          <div class="equip-emoji">📱</div>
+          <div class="equip-emoji equipment-icon">📱</div>
           <h3>Content Creator & Réseaux Sociaux</h3>
-          <p>Création de vidéos verticales prêtes à publier sur Instagram, TikTok et Facebook.</p>
+          <p>Création de vidéos verticales prêtes à publier sur Instagram, TikTok et Facebook, capturées et montées spécialement pour les réseaux sociaux.</p>
         </div>
+
       </div>
     </section>
 
@@ -313,37 +385,37 @@
     <section class="section" id="prestations">
       <div class="section-heading reveal">
         <p class="eyebrow"><span class="line-left"></span> Prestations <span class="line-right"></span></p>
-        <h2>Des offres sur mesure<br />pour votre mariage</h2>
+        <h2>Des offres sur mesure<br>pour votre mariage</h2>
       </div>
+
       <div class="cards-grid three-up">
-        <article class="card service-card reveal" data-delay="0">
+        <article class="card service-card tilt-card reveal" data-delay="0">
           <div class="service-number">01</div>
           <h3>Photographie</h3>
           <p>Couverture complète avec un regard artistique, poétique et raffiné.</p>
-          <div class="card-footer"><a href="#contact" class="card-link">En savoir plus →</a></div>
         </article>
-        <article class="card service-card reveal" data-delay="150">
+
+        <article class="card service-card tilt-card reveal" data-delay="150">
           <div class="service-number">02</div>
           <h3>Vidéo</h3>
           <p>Films de mariage cinématographiques conçus pour durer dans le temps.</p>
-          <div class="card-footer"><a href="#contact" class="card-link">En savoir plus →</a></div>
         </article>
-        <article class="card service-card reveal" data-delay="300">
+
+        <article class="card service-card tilt-card reveal" data-delay="300">
           <div class="service-number">03</div>
           <h3>Content Creator</h3>
-          <p>Vidéos verticales pour Instagram, TikTok et Facebook — livrées rapidement.</p>
-          <div class="card-footer"><a href="#contact" class="card-link">En savoir plus →</a></div>
+          <p>Vidéos verticales pour Instagram, TikTok et Facebook — livrées rapidement après votre journée.</p>
         </article>
       </div>
     </section>
 
     <!-- PARALLAX DIVIDER -->
     <section class="parallax-divider">
-      <div class="parallax-bg" style="background-image: url('photo-5.jpg')"></div>
+      <div class="parallax-image parallax-bg" style="background-image:url('photo-5.jpg')"></div>
       <div class="parallax-overlay"></div>
       <div class="parallax-content reveal">
         <p class="eyebrow">L'art de capturer l'éphémère</p>
-        <h2>Chaque mariage est une histoire unique<br />qui mérite d'être racontée avec beauté</h2>
+        <h2>Chaque mariage est une histoire unique<br>qui mérite d'être racontée avec beauté</h2>
       </div>
     </section>
 
@@ -351,80 +423,70 @@
     <section class="section" id="tarifs">
       <div class="section-heading reveal">
         <p class="eyebrow"><span class="line-left"></span> Tarifs <span class="line-right"></span></p>
-        <h2>Des formules conçues<br />pour chaque univers</h2>
+        <h2>Des formules conçues<br>pour chaque univers</h2>
       </div>
-      <div class="cards-grid three-up">
 
-        <!-- ESSENTIEL -->
-        <article class="card price-card reveal" data-delay="0">
+      <div class="cards-grid three-up pricing-grid">
+
+        <article class="card price-card tilt-card reveal" data-delay="0">
           <div class="price-tier">Essentiel</div>
           <p class="price">790 <span class="currency">€</span></p>
           <p class="price-subtitle">Reportage Photo</p>
           <div class="price-divider"></div>
-          <ul>
-            <li><span class="check">✓</span> Présence des préparatifs jusqu'au gâteau</li>
-            <li><span class="check">✓</span> Reportage photo complet</li>
-            <li><span class="check">✓</span> Retouches professionnelles</li>
-            <li><span class="check">✓</span> Photos en haute définition</li>
-            <li><span class="check">✓</span> Livraison via lien de téléchargement sécurisé</li>
+          <ul class="price-list">
+            <li>Présence des préparatifs jusqu'au gâteau</li>
+            <li>Reportage photo complet</li>
+            <li>Retouches professionnelles</li>
+            <li>Photos en haute définition</li>
+            <li>Livraison via lien de téléchargement sécurisé</li>
           </ul>
           <a class="button outline" href="#contact">Choisir</a>
         </article>
 
-        <!-- SIGNATURE -->
-        <article class="card price-card featured reveal" data-delay="150">
+        <article class="card price-card featured tilt-card reveal" data-delay="150">
           <div class="featured-badge">Le plus demandé</div>
           <div class="price-tier">Signature</div>
           <p class="price">1 490 <span class="currency">€</span></p>
           <p class="price-subtitle">Photo & Vidéo</p>
           <div class="price-divider"></div>
-          <ul>
-            <li><span class="check">✓</span> Présence des préparatifs jusqu'au gâteau</li>
-            <li><span class="check">✓</span> Reportage photo complet</li>
-            <li><span class="check">✓</span> Film de mariage cinématographique</li>
-            <li><span class="check">✓</span> Teaser pour les réseaux sociaux</li>
-            <li><span class="check">✓</span> Retouches professionnelles</li>
-            <li><span class="check">✓</span> Photos et vidéos en haute définition</li>
-            <li><span class="check">✓</span> Livraison via lien de téléchargement sécurisé</li>
+          <ul class="price-list">
+            <li>Présence des préparatifs jusqu'au gâteau</li>
+            <li>Reportage photo complet</li>
+            <li>Film de mariage cinématographique</li>
+            <li>Teaser pour les réseaux sociaux</li>
+            <li>Retouches professionnelles</li>
+            <li>Photos et vidéos en haute définition</li>
+            <li>Livraison via lien de téléchargement sécurisé</li>
           </ul>
           <a class="button primary" href="#contact">Choisir</a>
         </article>
 
-        <!-- PRESTIGE -->
-        <article class="card price-card reveal" data-delay="300">
-          <div class="featured-badge prestige-badge">👑 L'expérience complète</div>
+        <article class="card price-card tilt-card reveal" data-delay="300">
+          <div class="featured-badge prestige-badge">L'expérience complète</div>
           <div class="price-tier">Prestige</div>
           <p class="price">1 990 <span class="currency">€</span></p>
           <p class="price-subtitle">Photo • Vidéo • Content Creator</p>
           <div class="price-divider"></div>
-          <ul>
-            <li><span class="check">✓</span> Présence des préparatifs jusqu'à la soirée</li>
-            <li><span class="check">✓</span> Reportage photo complet</li>
-            <li><span class="check">✓</span> Film de mariage cinématographique premium</li>
-            <li><span class="check">✓</span> Vidéos verticales Instagram, TikTok & Facebook</li>
-            <li><span class="check">✓</span> Service Content Creator réseaux sociaux</li>
-            <li><span class="check">✓</span> Livraison rapide des contenus réseaux sociaux</li>
-            <li><span class="check">✓</span> Retouches professionnelles premium</li>
-            <li><span class="check">✓</span> Photos et vidéos en haute définition</li>
-            <li><span class="check">✓</span> Livraison via lien de téléchargement sécurisé</li>
+          <ul class="price-list">
+            <li>Présence des préparatifs jusqu'à la soirée</li>
+            <li>Reportage photo complet</li>
+            <li>Film de mariage cinématographique premium</li>
+            <li>Plusieurs vidéos verticales prêtes à publier sur Instagram, TikTok et Facebook</li>
+            <li>Service Content Creator dédié aux réseaux sociaux</li>
+            <li>Livraison rapide des contenus réseaux sociaux</li>
+            <li>Retouches professionnelles premium</li>
+            <li>Photos et vidéos en haute définition</li>
+            <li>Livraison via lien de téléchargement sécurisé</li>
           </ul>
           <a class="button outline" href="#contact">Choisir</a>
         </article>
-
       </div>
 
-      <!-- OPTIONS -->
-      <div class="options-bar reveal">
-        <p class="options-title">Options</p>
+      <div class="options-box options-bar reveal">
+        <h3 class="options-title">Options</h3>
         <div class="options-list">
-          <div class="option-item">
-            <span class="option-icon">🚁</span>
-            <span class="option-text"><strong>Drone</strong> — +300 €</span>
-          </div>
-          <div class="option-item">
-            <span class="option-icon">⏱</span>
-            <span class="option-text"><strong>Heure supplémentaire</strong> — +100 €/h</span>
-          </div>
+          <div class="option-item"><strong>Drone</strong> — +300 €</div>
+          <div class="option-item"><strong>Heure supplémentaire</strong> — +100 €/h</div>
         </div>
       </div>
     </section>
@@ -435,72 +497,62 @@
         <p class="eyebrow"><span class="line-left"></span> Galerie <span class="line-right"></span></p>
         <h2>Quelques images inspirantes</h2>
       </div>
+
       <div class="gallery-masonry">
         <article class="gallery-item reveal" data-delay="0">
-          <img src="photo-1.jpg" alt="Mariage Samia Productions" loading="lazy" />
-          <div class="gallery-overlay"><span class="gallery-icon">⤢</span></div>
+          <img src="photo-1.jpg" alt="Mariage Samia Productions 1" loading="lazy" />
         </article>
-        <article class="gallery-item tall reveal" data-delay="100">
-          <img src="photo-2.jpg" alt="Mariage Samia Productions" loading="lazy" />
-          <div class="gallery-overlay"><span class="gallery-icon">⤢</span></div>
+        <article class="gallery-item tall reveal" data-delay="80">
+          <img src="photo-2.jpg" alt="Mariage Samia Productions 2" loading="lazy" />
         </article>
-        <article class="gallery-item reveal" data-delay="200">
-          <img src="photo-3.jpg" alt="Mariage Samia Productions" loading="lazy" />
-          <div class="gallery-overlay"><span class="gallery-icon">⤢</span></div>
+        <article class="gallery-item reveal" data-delay="120">
+          <img src="photo-3.jpg" alt="Mariage Samia Productions 3" loading="lazy" />
         </article>
-        <article class="gallery-item reveal" data-delay="300">
-          <img src="photo-4.jpg" alt="Mariage Samia Productions" loading="lazy" />
-          <div class="gallery-overlay"><span class="gallery-icon">⤢</span></div>
+        <article class="gallery-item reveal" data-delay="160">
+          <img src="photo-4.jpg" alt="Mariage Samia Productions 4" loading="lazy" />
         </article>
-        <article class="gallery-item tall reveal" data-delay="100">
-          <img src="photo-6.jpg" alt="Mariage Samia Productions" loading="lazy" />
-          <div class="gallery-overlay"><span class="gallery-icon">⤢</span></div>
+        <article class="gallery-item tall reveal" data-delay="200">
+          <img src="photo-5.jpg" alt="Mariage Samia Productions 5" loading="lazy" />
         </article>
-        <article class="gallery-item reveal" data-delay="200">
-          <img src="photo-7.jpg" alt="Mariage Samia Productions" loading="lazy" />
-          <div class="gallery-overlay"><span class="gallery-icon">⤢</span></div>
+        <article class="gallery-item reveal" data-delay="240">
+          <img src="photo-6.jpg" alt="Mariage Samia Productions 6" loading="lazy" />
         </article>
         <article class="gallery-item reveal" data-delay="0">
-          <img src="photo-8.jpg" alt="Mariage Samia Productions" loading="lazy" />
-          <div class="gallery-overlay"><span class="gallery-icon">⤢</span></div>
+          <img src="photo-7.jpg" alt="Mariage Samia Productions 7" loading="lazy" />
         </article>
-        <article class="gallery-item tall reveal" data-delay="100">
-          <img src="photo-9.jpg" alt="Mariage Samia Productions" loading="lazy" />
-          <div class="gallery-overlay"><span class="gallery-icon">⤢</span></div>
+        <article class="gallery-item tall reveal" data-delay="80">
+          <img src="photo-8.jpg" alt="Mariage Samia Productions 8" loading="lazy" />
         </article>
-        <article class="gallery-item reveal" data-delay="200">
-          <img src="photo-10.jpg" alt="Mariage Samia Productions" loading="lazy" />
-          <div class="gallery-overlay"><span class="gallery-icon">⤢</span></div>
+        <article class="gallery-item reveal" data-delay="120">
+          <img src="photo-9.jpg" alt="Mariage Samia Productions 9" loading="lazy" />
+        </article>
+        <article class="gallery-item reveal" data-delay="160">
+          <img src="photo-10.jpg" alt="Mariage Samia Productions 10" loading="lazy" />
+        </article>
+        <article class="gallery-item tall reveal" data-delay="200">
+          <img src="photo-11.jpg" alt="Mariage Samia Productions 11" loading="lazy" />
+        </article>
+        <article class="gallery-item reveal" data-delay="240">
+          <img src="photo-12.jpg" alt="Mariage Samia Productions 12" loading="lazy" />
         </article>
         <article class="gallery-item reveal" data-delay="0">
-          <img src="photo-11.jpg" alt="Mariage Samia Productions" loading="lazy" />
-          <div class="gallery-overlay"><span class="gallery-icon">⤢</span></div>
+          <img src="photo-13.jpg" alt="Mariage Samia Productions 13" loading="lazy" />
         </article>
-        <article class="gallery-item tall reveal" data-delay="100">
-          <img src="photo-12.jpg" alt="Mariage Samia Productions" loading="lazy" />
-          <div class="gallery-overlay"><span class="gallery-icon">⤢</span></div>
+        <article class="gallery-item reveal" data-delay="80">
+          <img src="photo-14.jpg" alt="Mariage Samia Productions 14" loading="lazy" />
         </article>
-        <article class="gallery-item reveal" data-delay="200">
-          <img src="photo-13.jpg" alt="Mariage Samia Productions" loading="lazy" />
-          <div class="gallery-overlay"><span class="gallery-icon">⤢</span></div>
-        </article>
-        <article class="gallery-item reveal" data-delay="300">
-          <img src="photo-14.jpg" alt="Mariage Samia Productions" loading="lazy" />
-          <div class="gallery-overlay"><span class="gallery-icon">⤢</span></div>
-        </article>
-        <article class="gallery-item tall reveal" data-delay="100">
-          <img src="photo-15.jpg" alt="Mariage Samia Productions" loading="lazy" />
-          <div class="gallery-overlay"><span class="gallery-icon">⤢</span></div>
+        <article class="gallery-item tall reveal" data-delay="120">
+          <img src="photo-15.jpg" alt="Mariage Samia Productions 15" loading="lazy" />
         </article>
       </div>
     </section>
 
     <!-- LIGHTBOX -->
     <div class="lightbox" id="lightbox">
-      <button class="lightbox-close" id="lightboxClose">✕</button>
-      <button class="lightbox-prev" id="lightboxPrev">❮</button>
-      <button class="lightbox-next" id="lightboxNext">❯</button>
+      <button class="lightbox-close" id="lightboxClose" aria-label="Fermer">✕</button>
+      <button class="lightbox-nav prev lightbox-prev" id="lightboxPrev" aria-label="Précédent">❮</button>
       <img src="" alt="" id="lightboxImg" />
+      <button class="lightbox-nav next lightbox-next" id="lightboxNext" aria-label="Suivant">❯</button>
       <div class="lightbox-counter" id="lightboxCounter"></div>
     </div>
 
@@ -510,91 +562,93 @@
         <p class="eyebrow"><span class="line-left"></span> Témoignages <span class="line-right"></span></p>
         <h2>Ce que disent nos couples</h2>
       </div>
-      <div class="testimonials-slider">
+
+      <div class="testimonials-slider reveal">
         <div class="testimonial-track" id="testimonialTrack">
 
           <article class="testimonial-card">
             <div class="stars">★★★★★</div>
-            <blockquote>"Samia a su capturer chaque moment avec une sensibilité incroyable. Nos photos de mariage sont tout simplement magnifiques. Un talent rare et une personne adorable !"</blockquote>
+            <blockquote>“Samia a su capturer chaque moment avec une sensibilité incroyable. Nos photos de mariage sont tout simplement magnifiques.”</blockquote>
             <div class="testimonial-author">
-              <div class="author-avatar">S.B</div>
-              <div><strong>S. B.</strong><span>Mariée — 2024</span></div>
+              <span class="author-avatar avatar">S.B</span>
+              <div><strong>S. B.</strong><span>2024</span></div>
             </div>
           </article>
 
           <article class="testimonial-card">
             <div class="stars">★★★★★</div>
-            <blockquote>"Un travail exceptionnel, des photos et vidéos bien au-delà de nos attentes. Samia est professionnelle, douce et à l'écoute. Merci infiniment !"</blockquote>
+            <blockquote>“Un travail exceptionnel, des photos et vidéos bien au-delà de nos attentes. Merci infiniment !”</blockquote>
             <div class="testimonial-author">
-              <div class="author-avatar">M.K</div>
-              <div><strong>M. K.</strong><span>Mariée — 2024</span></div>
+              <span class="author-avatar avatar">M.K</span>
+              <div><strong>M. K.</strong><span>2024</span></div>
             </div>
           </article>
 
           <article class="testimonial-card">
             <div class="stars">★★★★★</div>
-            <blockquote>"Très professionnelle et discrète tout au long de la journée. Le résultat est juste parfait, je recommande les yeux fermés."</blockquote>
+            <blockquote>“Très professionnelle et discrète tout au long de la journée. Le résultat est juste parfait.”</blockquote>
             <div class="testimonial-author">
-              <div class="author-avatar">A.L</div>
-              <div><strong>A. L.</strong><span>Mariée — 2024</span></div>
+              <span class="author-avatar avatar">A.L</span>
+              <div><strong>A. L.</strong><span>2024</span></div>
             </div>
           </article>
 
           <article class="testimonial-card">
             <div class="stars">★★★★★</div>
-            <blockquote>"Le teaser pour Instagram était incroyable, tous nos invités l'ont adoré ! Samia a un vrai sens artistique et une énergie magnifique."</blockquote>
+            <blockquote>“Le teaser pour Instagram était incroyable ! Tous nos invités l'ont adoré.”</blockquote>
             <div class="testimonial-author">
-              <div class="author-avatar">N.D</div>
-              <div><strong>N. D.</strong><span>Mariée — 2025</span></div>
+              <span class="author-avatar avatar">N.D</span>
+              <div><strong>N. D.</strong><span>2025</span></div>
             </div>
           </article>
 
           <article class="testimonial-card">
             <div class="stars">★★★★★</div>
-            <blockquote>"Samia a rendu notre journée inoubliable. Les photos sont dignes d'un magazine de luxe. On ne regrette absolument pas notre choix !"</blockquote>
+            <blockquote>“Samia a rendu notre journée inoubliable. Les photos sont dignes d'un magazine.”</blockquote>
             <div class="testimonial-author">
-              <div class="author-avatar">F.H</div>
-              <div><strong>F. H.</strong><span>Mariée — 2025</span></div>
+              <span class="author-avatar avatar">F.H</span>
+              <div><strong>F. H.</strong><span>2025</span></div>
             </div>
           </article>
 
           <article class="testimonial-card">
             <div class="stars">★★★★★</div>
-            <blockquote>"Service impeccable du début à la fin. Les photos ont été livrées rapidement et tout le monde me demande son contact. Merci pour tout !"</blockquote>
+            <blockquote>“Service impeccable du début à la fin. Les photos ont été livrées rapidement et tout le monde me demande son contact.”</blockquote>
             <div class="testimonial-author">
-              <div class="author-avatar">R.M</div>
-              <div><strong>R. M.</strong><span>Mariée — 2025</span></div>
+              <span class="author-avatar avatar">R.M</span>
+              <div><strong>R. M.</strong><span>2025</span></div>
             </div>
           </article>
 
           <article class="testimonial-card">
             <div class="stars">★★★★★</div>
-            <blockquote>"Une vraie artiste ! La vidéo cinématographique nous a fait pleurer de joie. Chaque détail est soigné avec une précision remarquable."</blockquote>
+            <blockquote>“Une vraie artiste ! La vidéo cinématographique nous a fait pleurer de joie.”</blockquote>
             <div class="testimonial-author">
-              <div class="author-avatar">L.T</div>
-              <div><strong>L. T.</strong><span>Mariée — 2026</span></div>
+              <span class="author-avatar avatar">L.T</span>
+              <div><strong>L. T.</strong><span>2026</span></div>
             </div>
           </article>
 
           <article class="testimonial-card">
             <div class="stars">★★★★★</div>
-            <blockquote>"Nous avons choisi la formule Prestige et nous ne regrettons rien. Une expérience complète, luxueuse et un souvenir pour la vie. Merci Samia !"</blockquote>
+            <blockquote>“Nous avons choisi la formule Prestige et nous ne regrettons rien. Un souvenir pour la vie.”</blockquote>
             <div class="testimonial-author">
-              <div class="author-avatar">K.A</div>
-              <div><strong>K. A.</strong><span>Mariée — 2026</span></div>
+              <span class="author-avatar avatar">K.A</span>
+              <div><strong>K. A.</strong><span>2026</span></div>
             </div>
           </article>
 
           <article class="testimonial-card">
             <div class="stars">★★★★★</div>
-            <blockquote>"Réactive, créative et tellement adorable. Samia a su capturer notre amour avec une beauté et une élégance incomparables. Mille mercis !"</blockquote>
+            <blockquote>“Réactive, créative et adorable. Merci Samia pour ce travail magnifique !”</blockquote>
             <div class="testimonial-author">
-              <div class="author-avatar">Y.S</div>
-              <div><strong>Y. S.</strong><span>Mariée — 2026</span></div>
+              <span class="author-avatar avatar">Y.S</span>
+              <div><strong>Y. S.</strong><span>2026</span></div>
             </div>
           </article>
 
         </div>
+
         <div class="slider-controls">
           <button class="slider-btn" id="prevTestimonial">❮</button>
           <div class="slider-dots" id="sliderDots"></div>
@@ -609,87 +663,71 @@
         <p class="eyebrow"><span class="line-left"></span> Contact <span class="line-right"></span></p>
         <h2>Discutons de votre projet</h2>
       </div>
+
       <div class="contact-grid">
 
-        <div class="contact-info reveal" data-delay="0">
-          <article class="card contact-card">
-            <h3>Prenons rendez-vous</h3>
-            <p>Disponible pour les mariages en France et à l'international.</p>
-            <div class="contact-details">
-              <a href="mailto:Samia.productions@hotmail.com" class="contact-item contact-item-link">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                <span>Samia.productions@hotmail.com</span>
-              </a>
-              <a href="tel:0676025520" class="contact-item contact-item-link">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 015.19 12.9a19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-                <span>06 76 02 55 20</span>
-              </a>
-              <div class="contact-item">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                <span>France & International</span>
-              </div>
-            </div>
-            <div class="contact-cta-btns">
-              <a href="mailto:Samia.productions@hotmail.com" class="button primary contact-btn">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                <span>Envoyer un email</span>
-              </a>
-              <a href="tel:0676025520" class="button secondary contact-btn">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 015.19 12.9a19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-                <span>Appeler maintenant</span>
-              </a>
-            </div>
-            <div class="social-links">
-              <a href="#" class="social-link" aria-label="Instagram">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-              </a>
-              <a href="#" class="social-link" aria-label="Facebook">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
-              </a>
-              <a href="#" class="social-link" aria-label="TikTok">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
-              </a>
-            </div>
-          </article>
-        </div>
+        <article class="card contact-card tilt-card reveal" data-delay="0">
+          <h3>Prenons rendez-vous</h3>
+          <p>Disponible pour les mariages en France et à l’international.</p>
 
-        <div class="card form-card contact-info-card reveal" data-delay="200">
-          <h3 class="contact-info-title">Comment ça se passe ?</h3>
-          <div class="process-steps">
-            <div class="process-step">
-              <div class="step-num">01</div>
-              <div class="step-content">
-                <strong>Vous me contactez</strong>
-                <p>Par email ou téléphone pour vérifier ma disponibilité à votre date.</p>
-              </div>
-            </div>
-            <div class="process-step">
-              <div class="step-num">02</div>
-              <div class="step-content">
-                <strong>On échange sur votre projet</strong>
-                <p>Je prends le temps de comprendre votre vision, vos envies et votre programme.</p>
-              </div>
-            </div>
-            <div class="process-step">
-              <div class="step-num">03</div>
-              <div class="step-content">
-                <strong>Je capture votre journée</strong>
-                <p>Reportage discret, naturel et élégant du début à la fin.</p>
-              </div>
-            </div>
-            <div class="process-step">
-              <div class="step-num">04</div>
-              <div class="step-content">
-                <strong>Livraison rapide & sécurisée</strong>
-                <p>Vos photos et vidéos retouchées, livrées via lien de téléchargement privé.</p>
-              </div>
+          <div class="contact-details">
+            <a href="mailto:Samia.productions@hotmail.com" class="contact-item">
+              <span>✉</span>
+              <span>Samia.productions@hotmail.com</span>
+            </a>
+
+            <a href="tel:0676025520" class="contact-item">
+              <span>☎</span>
+              <span>06 76 02 55 20</span>
+            </a>
+
+            <div class="contact-item">
+              <span>⌖</span>
+              <span>France & International</span>
             </div>
           </div>
-          <a href="mailto:Samia.productions@hotmail.com" class="button primary" style="margin-top:24px;justify-content:center;">
-            <span>Réserver ma date</span>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </a>
-        </div>
+
+          <div class="contact-actions contact-cta-btns">
+            <a href="mailto:Samia.productions@hotmail.com" class="button primary">Envoyer un email</a>
+            <a href="tel:0676025520" class="button secondary">Appeler maintenant</a>
+          </div>
+        </article>
+
+        <article class="card process-card form-card contact-info-card tilt-card reveal" data-delay="200">
+          <h3 class="contact-info-title">Comment ça se passe ?</h3>
+
+          <div class="process-step">
+            <div class="step-number step-num">01</div>
+            <div>
+              <strong>Vous me contactez</strong>
+              <p>Par email ou téléphone pour vérifier ma disponibilité à votre date.</p>
+            </div>
+          </div>
+
+          <div class="process-step">
+            <div class="step-number step-num">02</div>
+            <div>
+              <strong>On échange sur votre projet</strong>
+              <p>Je prends le temps de comprendre votre vision, vos envies et votre programme.</p>
+            </div>
+          </div>
+
+          <div class="process-step">
+            <div class="step-number step-num">03</div>
+            <div>
+              <strong>Je capture votre journée</strong>
+              <p>Reportage discret, naturel et élégant du début à la fin.</p>
+            </div>
+          </div>
+
+          <div class="process-step">
+            <div class="step-number step-num">04</div>
+            <div>
+              <strong>Livraison rapide & sécurisée</strong>
+              <p>Vos photos et vidéos retouchées, livrées via lien de téléchargement privé.</p>
+            </div>
+          </div>
+        </article>
 
       </div>
     </section>
@@ -700,7 +738,7 @@
   <footer class="footer">
     <div class="footer-content">
       <div class="footer-brand">
-        <img src="logo.png" alt="Logo" class="footer-logo">
+        <img src="logo.png" alt="Logo Samia Productions" class="footer-logo">
         <h3>Samia Productions</h3>
         <p>L'art de capturer vos plus beaux moments.</p>
         <div class="footer-contact">
@@ -708,6 +746,7 @@
           <a href="tel:0676025520">06 76 02 55 20</a>
         </div>
       </div>
+
       <div class="footer-links">
         <a href="#home">Accueil</a>
         <a href="#presentation">Présentation</a>
@@ -717,6 +756,7 @@
         <a href="#galerie">Galerie</a>
         <a href="#contact">Contact</a>
       </div>
+
       <div class="footer-bottom">
         <p>© <span id="year"></span> Samia Productions — Tous droits réservés</p>
       </div>
@@ -724,9 +764,7 @@
   </footer>
 
   <!-- BACK TO TOP -->
-  <button class="back-to-top" id="backToTop" aria-label="Retour en haut">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
-  </button>
+  <button class="back-to-top" id="backToTop" aria-label="Retour en haut">↑</button>
 
   <script src="script.js"></script>
 </body>
