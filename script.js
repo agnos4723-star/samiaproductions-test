@@ -1,8 +1,7 @@
-// ====================== SAMIA PRODUCTIONS — SCRIPT.JS ======================
+// ====================== SAMIA PRODUCTIONS — SCRIPT.JS SPATIAL ======================
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  // ==================== UTILS ====================
   const $ = (id) => document.getElementById(id);
   const $$ = (sel) => document.querySelectorAll(sel);
 
@@ -15,6 +14,58 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ==================== YEAR ====================
   $('year').textContent = new Date().getFullYear();
+
+  // ==================== STARS CANVAS ====================
+  const starsCanvas = $('starsCanvas');
+  const starsCtx = starsCanvas.getContext('2d');
+  let stars = [];
+
+  function resizeStars() {
+    starsCanvas.width = window.innerWidth;
+    starsCanvas.height = window.innerHeight;
+  }
+
+  class Star {
+    constructor() { this.reset(); }
+    reset() {
+      this.x = Math.random() * starsCanvas.width;
+      this.y = Math.random() * starsCanvas.height;
+      this.size = Math.random() * 2 + 0.5;
+      this.opacity = Math.random() * 0.8 + 0.2;
+      this.twinkleSpeed = Math.random() * 0.02 + 0.005;
+      this.twinkleDir = Math.random() > 0.5 ? 1 : -1;
+      this.color = Math.random() > 0.8 ? '#4da6ff' : Math.random() > 0.9 ? '#c9a96e' : '#ffffff';
+    }
+    update() {
+      this.opacity += this.twinkleSpeed * this.twinkleDir;
+      if (this.opacity >= 1) { this.opacity = 1; this.twinkleDir = -1; }
+      if (this.opacity <= 0.1) { this.opacity = 0.1; this.twinkleDir = 1; }
+    }
+    draw() {
+      starsCtx.beginPath();
+      starsCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      starsCtx.fillStyle = this.color.replace(')', ',' + this.opacity + ')').replace('rgb', 'rgba').replace('#ffffff', 'rgba(255,255,255,' + this.opacity + ')').replace('#4da6ff', 'rgba(77,166,255,' + this.opacity + ')').replace('#c9a96e', 'rgba(201,169,110,' + this.opacity + ')');
+      starsCtx.fill();
+    }
+  }
+
+  function initStars() {
+    resizeStars();
+    const count = window.innerWidth < 768 ? 150 : 300;
+    stars = [];
+    for (let i = 0; i < count; i++) { stars.push(new Star()); }
+  }
+
+  function animateStars() {
+    starsCtx.clearRect(0, 0, starsCanvas.width, starsCanvas.height);
+    stars.forEach(star => { star.update(); star.draw(); });
+    requestAnimationFrame(animateStars);
+  }
+
+  initStars();
+  animateStars();
+
+  window.addEventListener('resize', initStars);
 
   // ==================== CUSTOM CURSOR ====================
   const cursor = $('cursor');
@@ -61,8 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const target = document.querySelector(link.getAttribute('href'));
       if (target) {
         e.preventDefault();
-        const offset = 80;
-        const topPos = target.getBoundingClientRect().top + window.scrollY - offset;
+        const topPos = target.getBoundingClientRect().top + window.scrollY - 80;
         window.scrollTo({ top: topPos, behavior: 'smooth' });
       }
     });
@@ -105,31 +155,21 @@ document.addEventListener('DOMContentLoaded', () => {
   const counterObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (!entry.isIntersecting) return;
-
       const el = entry.target;
       const target = parseInt(el.dataset.target);
       const isPercent = target === 98;
       let current = 0;
-      const duration = 1800;
       const steps = 60;
       const increment = target / steps;
-      const stepTime = duration / steps;
+      const stepTime = 1800 / steps;
 
       const timer = setInterval(() => {
         current += increment;
         if (current >= target) {
-          if (isPercent) {
-            el.textContent = target + '%';
-          } else {
-            el.textContent = target + '+';
-          }
+          el.textContent = isPercent ? target + '%' : target + '+';
           clearInterval(timer);
         } else {
-          if (isPercent) {
-            el.textContent = Math.floor(current) + '%';
-          } else {
-            el.textContent = Math.floor(current);
-          }
+          el.textContent = isPercent ? Math.floor(current) + '%' : Math.floor(current);
         }
       }, stepTime);
 
@@ -164,27 +204,14 @@ document.addEventListener('DOMContentLoaded', () => {
     lightboxCounter.textContent = (currentIndex + 1) + ' / ' + galleryImages.length;
   }
 
-  function nextImage() {
-    currentIndex = (currentIndex + 1) % galleryImages.length;
-    updateLightbox();
-  }
+  function nextImage() { currentIndex = (currentIndex + 1) % galleryImages.length; updateLightbox(); }
+  function prevImage() { currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length; updateLightbox(); }
 
-  function prevImage() {
-    currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
-    updateLightbox();
-  }
-
-  galleryItems.forEach((item, i) => {
-    item.addEventListener('click', () => openLightbox(i));
-  });
-
+  galleryItems.forEach((item, i) => { item.addEventListener('click', () => openLightbox(i)); });
   $('lightboxClose').addEventListener('click', closeLightbox);
   $('lightboxNext').addEventListener('click', nextImage);
   $('lightboxPrev').addEventListener('click', prevImage);
-
-  lightbox.addEventListener('click', (e) => {
-    if (e.target === lightbox) closeLightbox();
-  });
+  lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
 
   document.addEventListener('keydown', (e) => {
     if (!lightbox.classList.contains('active')) return;
@@ -193,20 +220,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.key === 'ArrowLeft') prevImage();
   });
 
-  // ==================== TOUCH SWIPE LIGHTBOX ====================
   let touchStartX = 0;
-  let touchEndX = 0;
-
-  lightbox.addEventListener('touchstart', (e) => {
-    touchStartX = e.changedTouches[0].screenX;
-  }, { passive: true });
-
+  lightbox.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
   lightbox.addEventListener('touchend', (e) => {
-    touchEndX = e.changedTouches[0].screenX;
-    const diff = touchStartX - touchEndX;
-    if (Math.abs(diff) > 50) {
-      if (diff > 0) { nextImage(); } else { prevImage(); }
-    }
+    const diff = touchStartX - e.changedTouches[0].screenX;
+    if (Math.abs(diff) > 50) { diff > 0 ? nextImage() : prevImage(); }
   }, { passive: true });
 
   // ==================== TESTIMONIALS SLIDER ====================
@@ -227,25 +245,13 @@ document.addEventListener('DOMContentLoaded', () => {
   function goToSlide(index) {
     currentSlide = index;
     track.style.transform = 'translateX(-' + (currentSlide * 100) + '%)';
-    $$('.slider-dot').forEach((dot, i) => {
-      dot.classList.toggle('active', i === currentSlide);
-    });
+    $$('.slider-dot').forEach((dot, i) => { dot.classList.toggle('active', i === currentSlide); });
   }
 
-  $('nextTestimonial').addEventListener('click', () => {
-    goToSlide((currentSlide + 1) % totalSlides);
-  });
+  $('nextTestimonial').addEventListener('click', () => { goToSlide((currentSlide + 1) % totalSlides); });
+  $('prevTestimonial').addEventListener('click', () => { goToSlide((currentSlide - 1 + totalSlides) % totalSlides); });
 
-  $('prevTestimonial').addEventListener('click', () => {
-    goToSlide((currentSlide - 1 + totalSlides) % totalSlides);
-  });
-
-  function startAutoplay() {
-    autoplay = setInterval(() => {
-      goToSlide((currentSlide + 1) % totalSlides);
-    }, 5000);
-  }
-
+  function startAutoplay() { autoplay = setInterval(() => { goToSlide((currentSlide + 1) % totalSlides); }, 5000); }
   function stopAutoplay() { clearInterval(autoplay); }
 
   const sliderContainer = document.querySelector('.testimonials-slider');
@@ -254,22 +260,11 @@ document.addEventListener('DOMContentLoaded', () => {
   startAutoplay();
 
   let sliderTouchStartX = 0;
-  let sliderTouchEndX = 0;
-
-  sliderContainer.addEventListener('touchstart', (e) => {
-    sliderTouchStartX = e.changedTouches[0].screenX;
-    stopAutoplay();
-  }, { passive: true });
-
+  sliderContainer.addEventListener('touchstart', (e) => { sliderTouchStartX = e.changedTouches[0].screenX; stopAutoplay(); }, { passive: true });
   sliderContainer.addEventListener('touchend', (e) => {
-    sliderTouchEndX = e.changedTouches[0].screenX;
-    const diff = sliderTouchStartX - sliderTouchEndX;
+    const diff = sliderTouchStartX - e.changedTouches[0].screenX;
     if (Math.abs(diff) > 50) {
-      if (diff > 0) {
-        goToSlide((currentSlide + 1) % totalSlides);
-      } else {
-        goToSlide((currentSlide - 1 + totalSlides) % totalSlides);
-      }
+      diff > 0 ? goToSlide((currentSlide + 1) % totalSlides) : goToSlide((currentSlide - 1 + totalSlides) % totalSlides);
     }
     startAutoplay();
   }, { passive: true });
@@ -292,19 +287,18 @@ document.addEventListener('DOMContentLoaded', () => {
       this.size = Math.random() * 1.5 + 0.5;
       this.speedX = (Math.random() - 0.5) * 0.3;
       this.speedY = (Math.random() - 0.5) * 0.3;
-      this.opacity = Math.random() * 0.5 + 0.1;
+      this.opacity = Math.random() * 0.4 + 0.1;
+      this.color = Math.random() > 0.5 ? '77,166,255' : '201,169,110';
     }
     update() {
       this.x += this.speedX;
       this.y += this.speedY;
-      if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
-        this.reset();
-      }
+      if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) { this.reset(); }
     }
     draw() {
       ctx.beginPath();
       ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(201,169,110,' + this.opacity + ')';
+      ctx.fillStyle = 'rgba(' + this.color + ',' + this.opacity + ')';
       ctx.fill();
     }
   }
@@ -329,7 +323,7 @@ document.addEventListener('DOMContentLoaded', () => {
           ctx.beginPath();
           ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
           ctx.lineTo(particlesArray[j].x, particlesArray[j].y);
-          ctx.strokeStyle = 'rgba(201,169,110,' + (0.06 * (1 - dist / 120)) + ')';
+          ctx.strokeStyle = 'rgba(77,166,255,' + (0.05 * (1 - dist / 120)) + ')';
           ctx.lineWidth = 0.5;
           ctx.stroke();
         }
@@ -359,7 +353,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   sections.forEach(s => sectionObserver.observe(s));
 
-  // ==================== EQUIPMENT PARALLAX 3D ====================
+  // ==================== EQUIPMENT 3D PARALLAX ====================
   $$('.equip-animation').forEach(anim => {
     anim.addEventListener('mousemove', (e) => {
       const rect = anim.getBoundingClientRect();
@@ -371,9 +365,7 @@ document.addEventListener('DOMContentLoaded', () => {
       anim.style.transform = 'perspective(500px) rotateY(0) rotateX(0)';
       anim.style.transition = 'transform 0.5s ease';
     });
-    anim.addEventListener('mouseenter', () => {
-      anim.style.transition = 'none';
-    });
+    anim.addEventListener('mouseenter', () => { anim.style.transition = 'none'; });
   });
 
   // ==================== CINEMA TIMECODE ====================
@@ -394,7 +386,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 40);
   }
 
+  // ==================== PARALLAX HERO SCROLL ====================
+  window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+    const heroBg = document.querySelector('.hero-bg-img');
+    const heroLogo = document.querySelector('.hero-logo-float');
+    if (heroBg) heroBg.style.transform = 'translateY(' + (scrollY * 0.3) + 'px)';
+    if (heroLogo) heroLogo.style.transform = 'translateX(-50%) translateY(' + (scrollY * 0.2) + 'px)';
+  });
+
   // ==================== CONSOLE LOG ====================
-  console.log('%cSamia Productions — Site chargé avec succès ✨', 'color:#c9a96e; font-size:14px; font-family:Cormorant Garamond,serif;');
+  console.log('%cSamia Productions 🚀 — Bienvenue dans l\'univers spatial ✨', 'color:#4da6ff; font-size:14px; font-family:Cormorant Garamond,serif;');
 
 });
